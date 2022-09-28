@@ -64,13 +64,13 @@ Now, let define a simple data model that represents a data point for .NET MAUI S
 ```
 public class Model
 {
-    public string Name { get; set; }
+    public string Day { get; set; }
 
     public double Degree { get; set; }
 
     public Model(string name , double degree)
     {
-        Name = name;
+        Day = day;
         Degree = degree;
     }
 }
@@ -87,11 +87,13 @@ public class ViewModel
     {
         Data = new ObservableCollection<Model>()
         {
-            new Model("Korea",39),
-            new Model("India",20),
-            new Model("Africa",  61),
-            new Model("China",65),
-            new Model("France",45),
+            new Model ("Sun",80),
+            new Model ("Mon",60 ),
+            new Model ("Tue",80),
+            new Model ("Wed",20),
+            new Model ("Thu",70),
+            new Model ("Fri",70),
+            new Model ("Sat",70),
         };
     }
 }
@@ -136,8 +138,8 @@ As we are going to visualize the comparison of annual rainfall in the data model
 . . .
     <chart:SfCartesianChart.Series>
         <chart:SplineSeries ItemsSource="{Binding Data}" 
-                            XBindingPath="Country" 
-                            YBindingPath="Counts" ShowDataLabels="True"/>
+                            XBindingPath="Day" 
+                            YBindingPath="Degree" ShowDataLabels="True"/>
     </chart:SfCartesianChart.Series>
 
 </chart:SfCartesianChart> 
@@ -151,8 +153,8 @@ chart.BindingContext = new ViewModel();
 var binding = new Binding() { Path = "Data" };
 var splineSeries = new SplineSeries()
 {
-XBindingPath = "Country ",
-YBindingPath = "Counts", 
+XBindingPath = "Day",
+YBindingPath = "Degree", 
 ShowDataLabels = true
 };
 
