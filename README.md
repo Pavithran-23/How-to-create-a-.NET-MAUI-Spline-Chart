@@ -21,7 +21,7 @@ xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Chart
 ```
 using Syncfusion.Maui.Charts;
 ```
-Initialize an empty chart with XAxes and YAxes as shown in the following code sample.
+Initialize an empty chart with XAxes and YAxes as shown in the following code sample:
 
 **[XAML]**
 
@@ -59,18 +59,18 @@ this.Content = chart;
 ```
 
 ## Initialize view model
-Now, let define a simple data model that represents a data point for .NET MAUI Spline Chart.
+Now, define a simple data model that represents a data point for .NET MAUI Spline Chart.
 
 ```
 public class Model
 {
-    public string Name { get; set; }
+    public string Day { get; set; }
 
     public double Degree { get; set; }
 
-    public Model(string name , double degree)
+    public Model(string Day , double degree)
     {
-        Name = name;
+        Day = Day;
         Degree = degree;
     }
 }
@@ -81,17 +81,19 @@ Create a view model class and initialize a list of objects as shown below,
 ```
 public class ViewModel
 {
-    public ObservableCollection<Model> Data { get; set; }
+    public List<Model> Data { get; set; }
 
     public ViewModel()
     {
         Data = new ObservableCollection<Model>()
         {
-            new Model("Korea",39),
-            new Model("India",20),
-            new Model("Africa",  61),
-            new Model("China",65),
-            new Model("France",45),
+          new Model ("Sun",80),            
+          new Model ("Mon",60 ),            
+          new Model ("Tue",80),            
+          new Model ("Wed",20),            
+          new Model ("Thu",70),            
+          new Model ("Fri",70),            
+          new Model ("Sat",70)
         };
     }
 }
@@ -99,12 +101,12 @@ public class ViewModel
 
 Set the ViewModel instance as the BindingContext of chart; this is done to bind properties of ViewModel to SfCartesianChart.
 
-> Note: Add namespace of ViewModel class in your XAML page if you prefer to set BindingContext in XAML.
+> Note: Add the namespace of ViewModel class in your XAML page if you prefer to set BindingContext in XAML.
 
 **[XAML]**
 
 ```
-xmlns:viewModel ="clr-namespace:MauiApp"
+xmlns:viewModel ="clr-namespace:Syncfusion_Dot_NET_MAUI_Spline_Charts"
 . . .
 <chart:SfCartesianChart>
 
@@ -122,9 +124,9 @@ chart.BindingContext = new ViewModel();
 ```
 
 ## How to populate data in .NET MAUI Spline Charts
-As we are going to visualize the comparison of annual rainfall in the data model, add SplineSeries to SfCartesianChart.Series property, and then bind the Data property of the above ViewModel to the SplineSeries.ItemsSource property as shown below.
+As we are going to visualize the comparison of weather reports in the data model, add SplineSeries to SfCartesianChart.Series property, and then bind the Data property of the above ViewModel to the SplineSeries.ItemsSource property as shown below.
 
-> Note: Need to set XBindingPath and YBindingPath properties, so that series would fetch values from the respective properties in the data model to plot the series.
+> Note:You need to set XBindingPath and YBindingPath properties, so that series would fetch values from the respective properties in the data model to plot the series.
 
 **[XAML]**
 
@@ -136,8 +138,8 @@ As we are going to visualize the comparison of annual rainfall in the data model
 . . .
     <chart:SfCartesianChart.Series>
         <chart:SplineSeries ItemsSource="{Binding Data}" 
-                            XBindingPath="Country" 
-                            YBindingPath="Counts" ShowDataLabels="True"/>
+                            XBindingPath="Day" 
+                            YBindingPath="Degree" ShowDataLabels="True"/>
     </chart:SfCartesianChart.Series>
 
 </chart:SfCartesianChart> 
@@ -151,8 +153,8 @@ chart.BindingContext = new ViewModel();
 var binding = new Binding() { Path = "Data" };
 var splineSeries = new SplineSeries()
 {
-XBindingPath = "Country ",
-YBindingPath = "Counts", 
+XBindingPath = "Day",
+YBindingPath = "Degree", 
 ShowDataLabels = true
 };
 
